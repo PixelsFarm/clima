@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 
-const Formulario = () => {
-	const [busqueda, guardarBusqueda] = useState({
-		ciudad: "",
-		pais: "",
-	});
-
+const Formulario = ({ busqueda, guardarBusqueda, guardarConsultar }) => {
 	const [error, guardarError] = useState(false);
 
 	const { ciudad, pais } = busqueda;
 
 	const handleChange = (e) => {
 		e.preventDefault();
+
 		guardarBusqueda({
 			...busqueda,
 			[e.target.name]: e.target.value,
@@ -29,6 +25,7 @@ const Formulario = () => {
 
 		//* pasamos a app.js
 		guardarError(false);
+		guardarConsultar(true);
 	};
 
 	return (
@@ -38,6 +35,7 @@ const Formulario = () => {
 					Todos los campos son obligatorios
 				</p>
 			) : null}
+
 			<div className="input-field col s12">
 				<input
 					type="text"
@@ -48,6 +46,7 @@ const Formulario = () => {
 				/>
 				<label htmlFor="ciudad">Ciudad: </label>
 			</div>
+
 			<div className="input-field col s12">
 				<select
 					name="pais"
@@ -55,7 +54,7 @@ const Formulario = () => {
 					value={pais}
 					onChange={handleChange}
 				>
-					<option value="">-- Selecciona un país</option>
+					<option value="">-- Seleccione un país --</option>
 					<option value="US">Estados Unidos</option>
 					<option value="MX">México</option>
 					<option value="AR">Argentina</option>
@@ -66,6 +65,7 @@ const Formulario = () => {
 				</select>
 				<label htmlFor="pais">País: </label>
 			</div>
+
 			<div className="input-field col s12">
 				<input
 					type="submit"
