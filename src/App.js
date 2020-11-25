@@ -19,9 +19,15 @@ function App() {
 	useEffect(() => {
 		//console.log(ciudad);
 		const consultarAPI = async () => {
+			if (!consultar) return
 			
-			http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=683cdf2642e3444cd540d39a85e18478
-				
+			//http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=683cdf2642e3444cd540d39a85e18478
+			const appId = '683cdf2642e3444cd540d39a85e18478'
+			const url = `http://api.openweathermap.org/data/2.5/forecast?q=${ciudad},${pais}&id=524901&appid=${appId}`
+			const respuesta = await fetch(url)
+			const resultado = await respuesta.json()
+			console.log(resultado)
+
 		}
 		consultarAPI()
 	}, [consultar]);
